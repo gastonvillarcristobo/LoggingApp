@@ -6,6 +6,9 @@ namespace LoggingApp
 {
     public  class JobLogger
     {
+
+        //ORIGINAL TASK
+
         private static bool _logToFile;
         private static bool _logToConsole;
         private static bool _logMessage;
