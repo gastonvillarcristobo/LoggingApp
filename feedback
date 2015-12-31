@@ -1,0 +1,14 @@
+FEEDBACK
+•	Se usó el patrón State para modelar el comportamiento de los dispositivos, evitando tener que utilizar una sentencia if para preguntar por el  tipo de un objeto.
+Cada tipo de dispositivo se modela con una clase concreta que implementa la interface "ILoggingDevice", que provee el método LogToDevice. Cada clase implementa el método de manera distinta, haciendo el log de cada mensaje dependiendo del dispositivo al que se le guardará.
+La ventaja es poder desacoplar el comportamiento de cada dispositivo independientemente de la clase que lo está usando, que solo debe ocuparse de enviar un único mensaje sin tener que conocer a qué dispositivo se lo está enviando ni como realizará la tarea.
+La clase que actua como "contexto" (JobLoggingSolution) se ocupa de almacenar el tipo de dispositivo que recibe como estado en una variable.
+•	Se modela los tipos de mensajes cada uno con una clase. La idea es tratar los tipos de mensajes como tipos en lugar de strings y que sean capaces de realizar comportamiento acorde a su tipo. Las demás clases pueden tratarlos polimorficamente, es decir, no necesitan conocer finalmente a qué mensaje delegan una tarea, ni como estos la realizan sino que es responsabilidad de cada tipo.
+•	Se incluyeron las directivas "using" en reemplazo de colocar el namespace. Esto hace el código más legible y reduce la complejidad para aquel que debe interpretarlo.
+•	Se declaran constantes que guarden valores fijos, como por ejemplo la extensión de un archivo, la ruta donde encontrarlo etc. De esta forma el código es más legible, y se pueden realizar cambios manuales facilmente y reutilizar valores.
+•	Se reemplaza el metodo WriteAllText por ReadAllText ya que el objetivo es ir guadando los logs, en lugar de pisar los anteriores con el nuevo.
+•	Las variables message (bool) y message(string) no pueden enviarse al método teniendo el mismo identificación ya que se encuentran en el mismo scope.
+•	En lugar de pasar tantos parámetros a un método (que lo hace tedioso de entender y poco escalable) se puede utilizar una clase que modele aquello como una "bolsa" de parámetros y pasárselo al método. Es el caso de "JobLoggerSettings".
+•	No se puede utilizar la fecha con formato "dd/MM/yyyy" porque se trata del nombre de un archivo, por lo tanto se usa el método ToString("ddMMyyyy") sobrecargado con el formato deseado.
+•	Se guarda en el archivo app.config la ubicación del archivo para luego obtenerla de ahí en lugar de andar repitiendo.
+
